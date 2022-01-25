@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import Card from './views/Card';
+import style from './App.module.css';
+import { useEffect, useState } from 'react';
 
-function App() {
+export default function App() {
+  const[ api, setApi ] = useState([]);
+
+  const handleApi = async () => {
+    let res = await fetch("https://rickandmortyapi.com/api/character");
+    let data = await res.json(); 
+    setApi(data.results);
+
+    fetch("https://rickandmortyapi.com/api/character")
+    .then(res => res.json())
+    .then(data => {setApi(data.results)});
+  };
+
+  useEffect(() => {
+    handleApi();
+  }, []);
+
+  const array = () => {
+    let arr = api.map(value => <Card key={value.id} data={value}/>)
+    return(
+      arr
+    );
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={style.container}>
+      <h1 className={style.container__title}>RICK AND MORTY'S API</h1>
+      <div className={style.container__cards}>
+        {/* {api.length!==0 && <Card data={api[0]}/>} */}
+        {array()} 
+        {/* {api.map(value => <Card key={value.id} data={value}/>)} */}
+      </div>
     </div>
   );
 }
-
-export default App;

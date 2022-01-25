@@ -1,0 +1,22 @@
+.search{
+  margin-top: 20px;
+  margin-bottom: 80px;
+  min-width: 400px;
+  display: flex;
+}
+
+.search input{
+  font-size: 20px;
+  width: 80%;
+  color: #6E767B;
+}
+
+.search button{
+  padding: 10px;
+  font-size: 20px;
+  margin-left: 10px;
+  background-color: #2997DF;
+  border-radius: 8%;
+  color: white;
+  border: none
+}
